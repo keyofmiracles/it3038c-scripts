@@ -1,6 +1,9 @@
-﻿mkdir $env:HOMEPATH\ALLPDFS
+﻿mkdir $env:HOMEPATH\NEWALLPDFS
+$directory = '$env:HOMEPATH\OneDrive'
 
-$items = Get-ChildItem -Recurse -Filter "*.txt*" 
+
+$items = Get-ChildItem $env:HOMEPATH -Recurse -Filter "*.pdf" | Where Directory -NotLike "$directory*"
+write $items
 
 $answer = Read-Host -Prompt "Make copies? Enter 'Yes' or 'No'"
 
@@ -8,11 +11,11 @@ if ($answer -eq 'Yes') {
 
 $items.fullname | ForEach-Object {
 
-Copy-Item -Path $_ -Destination $env:HOMEPATH\ALLPDFS
+Copy-Item -Path $_ -Destination $env:HOMEPATH\COPIEDPDFS
 
 }
 
-    $ans2 = Read-Host -Prompt "Delete Old files? Enter 'Yes' or 'No'"
+    $ans2 = Read-Host -Prompt "Delete Old files? Enter 'Yes' or 'No' (DELETE AT OWN RISK)"
     if ($ans2 -eq 'Yes') {
 
         $items.FullName | ForEach-Object {
@@ -25,7 +28,7 @@ Copy-Item -Path $_ -Destination $env:HOMEPATH\ALLPDFS
 
 if ($answer -eq 'No') {
 
-    Write "OK. Aborting."
+    Write "OK. Closing Program."
 }
 
 
