@@ -1,5 +1,13 @@
-﻿#Import any filetype Excel spreadsheet to PowerShell and save as a variable
+﻿Add-Type -AssemblyName System.Windows.Forms
+
+#Import any filetype Excel spreadsheet to PowerShell and save as a variable
 ##Code for File Browser borrowed from: https://4sysops.com/archives/how-to-create-an-open-file-folder-dialog-box-with-powershell/
+$ans1 = Read-Host -Prompt "Install and Import ImportExcel Module? Select Yes or No"
+
+if ($ans1 -like "*Yes*") {
+    Install-Module ImportExcel
+    Import-Module ImportExcel
+}
 
 $FileBrowser = New-Object System.Windows.Forms.OpenFileDialog -Property @{ 
     InitialDirectory = [Environment]::GetFolderPath('Desktop') 
