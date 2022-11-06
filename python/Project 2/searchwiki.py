@@ -1,3 +1,5 @@
+#wikipedia module documentation citation: https://pypi.org/project/wikipedia/
+
 import wikipedia
 
 var = input("Enter artist name: ")

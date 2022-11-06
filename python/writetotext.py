@@ -1,21 +1,9 @@
-import wikipedia
+from bs4 import BeautifulSoup
+import requests, re
 
-var = input("Enter search string: ")
-var = str(var)
-try:
-    contents = wikipedia.page(var, auto_suggest=False).content
-    print(contents)
+r = requests.get('https://en.wikipedia.org/wiki/Drake_(musician)').content
+soup = BeautifulSoup(r, 'html.parser')
+span = soup.find('span, {"class":"mw-headline" id="Discography')
 
-    with open('wikipage.txt', 'w', encoding='utf-8') as f:
-        f.write(contents)
-    
-    
-except wikipedia.exceptions.DisambiguationError as list:
-    print(list)
-    nextinput = input("Oops, which " + var + " were you referring to? Type it in here: ")
-    altcontent = wikipedia.WikipediaPage(nextinput).section("Discography")
-    print(altcontent)
-
- 
- 
+print(span)
 
