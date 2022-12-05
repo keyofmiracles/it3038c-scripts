@@ -14,6 +14,7 @@ if ($prompt1 -like "delete") {
     $chosendate = $date.AddDays(- + "$x")
     $name = ("deletereport" + $date.Month + "-" + $date.Year)
 
+    ##Found through Microsoft's Website##
     $FileBrowser = New-Object System.Windows.Forms.FolderBrowserDialog -Property @{
     Description = "Select folder to delete files from"
             }    
@@ -22,7 +23,7 @@ if ($prompt1 -like "delete") {
     $null = $FileBrowser.ShowDialog()
     $deletereport = Get-ChildItem -Path $FileBrowser.SelectedPath -Recurse | Where-Object -Property LastWriteTime -LE $chosendate | Sort-Object -Property LastWriteTime -Descending
 
-    ls $env:HOMEPATH\$foldername       
+    ls $deletereport    
     $ans2 = Read-Host -Prompt "Delete these files? Enter 'Yes' or 'No' (DELETE AT YOUR OWN RISK)"
     if ($ans2 -like 'Yes') {
         $deletereport.FullName | ForEach-Object {
@@ -30,7 +31,7 @@ if ($prompt1 -like "delete") {
         }
     }
 
-    write $deletereport
+
     $deletereport | Out-File ./$name.txt
 
 }
@@ -43,6 +44,8 @@ if ($prompt1 -like "arrange") {
     $pdfs = New-Object System.Management.Automation.Host.ChoiceDescription '.&pdf', "PDF Files"
     $excel = New-Object System.Management.Automation.Host.ChoiceDescription '.&xlsx', "Excel Files"
     $text = New-Object System.Management.Automation.Host.ChoiceDescription '.&txt', "Text Files"
+
+    ##Found through Microsoft's Website and https://4sysops.com/archives/read-host-and-the-choicedescription-class-prompt-for-user-input-in-powershell/##
 
     $options = [System.Management.Automation.Host.ChoiceDescription[]]($pdfs, $excel, $text)
 
