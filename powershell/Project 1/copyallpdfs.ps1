@@ -11,7 +11,7 @@ if ($OneDrive -eq "No") {
 $items = Get-ChildItem $env:HOMEPATH -Recurse -Filter "*.pdf" | Where Directory -NotLike "*$directory*"
 } else {
 
-$items = Get-ChildItem $env:HOMEPATH -Recurse -Filter "*.pdf" 
+$items = Get-ChildItem $env:HOMEPATH -Recurse -Filter "*.pdf"  
 
 }
 
